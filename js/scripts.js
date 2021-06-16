@@ -1,18 +1,31 @@
-let pokemonList = [
-  {name: "Blastoise", height: 5, types: ["Water"]},
-  
-  {name: "Metapod", height: 2, types: ["Bug"]},
-  
-  {name: "Venusaur", height: 6, types:["Grass","Poison"]},
-];  
 
+//IIFE function
+let pokemonRepository = (function(){
+        let pokemonList = [
+          {name: "Blastoise", height: 5, types: ["Water"]},
+          
+          {name: "Metapod", height: 2, types: ["Bug"]},
+          
+          {name: "Venusaur", height: 6, types:["Grass","Poison"]},
+        ];
+        
+        
+        
+        return {
+                getAll: function() {
+                        return pokemonList;
+                },
+                add: function(pokemon) {
+                        pokemonList.push(pokemon);
+                }
+        };
+})();
 
-
-
-
-pokemonList.forEach(function(pokemon) {
+pokemonRepository.getAll().forEach(function(pokemon, index) {;
   console.log(pokemon.name, pokemon.height, pokemon.types);
   
+  document.write(pokemon.name);
+  document.write('<br>');
 });
 
 
