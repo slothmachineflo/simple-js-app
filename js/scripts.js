@@ -9,24 +9,49 @@ let pokemonRepository = (function(){
           {name: "Venusaur", height: 6, types:["Grass","Poison"]},
         ];
         
+      function add(pokemon) {
+       pokemonList.push(pokemon);
+        }
         
+        function getAll(){
+        return pokemonList;
+        }
         
-        return {
-                getAll: function() {
-                        return pokemonList;
-                },
-                add: function(pokemon) {
-                        pokemonList.push(pokemon);
-                }
-        };
-})();
+	return {
+	add: add,
+	getAll: getAll
+	};
+     
+     })();
+      
+let myhtml = '';
+var largest =0;
+var bightml ='';
+let PokemonHeight = '';
+pokemonRepository.getAll().forEach(function(pokemon, index) {
 
-pokemonRepository.getAll().forEach(function(pokemon, index) {;
   console.log(pokemon.name, pokemon.height, pokemon.types);
+  myhtml += "Name:"+pokemon.name+" <br/>";
+  myhtml += "Height: "+pokemon.height+"<br/>";
+  myhtml += "Types: "+pokemon.types+"<br/>";
+  myhtml += "<hr/>";
+  if(largest< pokemon.height) {
+  largest = pokemon.height;
+  bightml =  "<h1>Wow this is big</h1>";
+  bightml += "Name:"+pokemon.name+" <br/>";
+  bightml += "Height: "+pokemon.height+"<br/>";
+  bightml += "Types: "+pokemon.types+"<br/>";
+  bightml += "<hr/>";
+  pokemonHeight =pokemon.name + " " + pokemon.height + " wow thats big";
   
-  document.write(pokemon.name);
-  document.write('<br>');
+  }
+ // document.write(pokemon.name , pokemon.height, pokemon.types);
+  //document.write('<br>');
 });
+console.log(myhtml);
+console.log(pokemonHeight);
+document.getElementById("mypokemon").innerHTML = myhtml;
+document.getElementById("mybig").innerHTML = bightml;
 
 
 
@@ -48,11 +73,11 @@ pokemonRepository.getAll().forEach(function(pokemon, index) {;
 //}
 
 //for (let i = 0; i < pokemonList.length; i++) {
-  //      let item = pokemonList[i];
+  //   let item = pokemonList[i];
         
-   //     if (i === biggest) {
-        //     document.write(item.name + " (height: " + item.height + ")" + " - //Wow, that's big!" + "<br/>");   
-     //   } else {
-         //       document.write(item.name + " (height: " + item.height + ")" + "<br/>");
-      //  }
-//}
+ //   if (i === biggest) {
+ //     document.write(item.name + " (height: " + item.height + ")" + " - //Wow, that's big!" + "<br/>");   
+ //   } else {
+ //              document.write(item.name + " (height: " + item.height + ")" + "<br/>");
+ //    }
+
