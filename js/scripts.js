@@ -1,7 +1,7 @@
-
 //IIFE function
 let pokemonRepository = (function() {
   let pokemonList = [];
+  let modalContainer = document.querySelector('#modal-container');
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
         
   function add(pokemon) {
@@ -37,13 +37,24 @@ let pokemonRepository = (function() {
     });
   }
 
+//   function showModal ()
+//   let modalContainer = document.querySelector('#modal-container');
+//   modalContainer.classList.add('is-visible');
+// }
+
+// document.querySelector('#show-modal').addEventListener('click') => {
+//   showModal();
+// });
+
+
   function showDetails(pokemon){
     console.log(pokemon)
+ 
     loadDetails(pokemon).then(function () {
       console.log(pokemon);
+      showModal(pokemon.name, pokemon.imageUrl, pokemon.height);
     });
   }
-
   function getAll(){
     return pokemonList;
   }
@@ -83,12 +94,67 @@ let pokemonRepository = (function() {
     });
   }
 
-  return {
+	return {
    addListItem: addListItem,
-   getAll: getAll,
+	 getAll: getAll,
    loadList: loadList,
    // loadDetails: loadDetails,
-  };
+	};
+
+  // modal functions
+  
+  function showModal(title, text, height) {
+    
+    modalContainer.innerHTML = '';
+    let modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    let closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    closeButtonElement.addEventListener('click', hideModal);
+
+    let titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+
+
+    let heightElement = document.createElement("p");
+    heightElement.innerText = "Height:"+height;
+    let contentElement = document.createElement('img');
+    contentElement.src = text;
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(heightElement);
+    modal.appendChild(contentElement);
+    modalContainer.appendChild(modal);
+
+
+    modalContainer.classList.add('is-visible');
+  }
+
+  function hideModal() {
+    modalContainer.classList.remove('is-visible');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();  
+    }
+  });
+  modalContainer.addEventListener('click', (e) => {
+    // Since this is also triggered when clicking INSIDE the modal
+    // We only want to close if the user clicks directly on the overlay
+    let target = e.target;
+    if (target === modalContainer) {
+      hideModal();
+    }
+  });
+
+  document.querySelector('#show-modal').addEventListener('click', () => {
+    alert("1");
+    showModal('Modal title', 'This is the modal content!');
+  });
 })();
       
 let myhtml = '';
@@ -135,7 +201,3 @@ function waitTwoSeconds() {
         }, 2000);
     });
 }
-waitTwoSeconds().then(function () {
-    // ..
-    console.log('We have waited 2 seconds and now we can do something else')
-})
