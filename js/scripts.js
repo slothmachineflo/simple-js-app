@@ -14,12 +14,17 @@ let pokemonRepository = (function () {
     const list = document.querySelector(".pokemon-list");
     // Create an li element
     const listItem = document.createElement("li");
+    listItem.classList.add("list-group-item");
     // Create a button element
     let button = document.createElement("button");
     // Set the button's inner text (display text)
     button.innerText = pokemon.name;
     // Add a class to the button
-    button.classList.add("pokemon-btn");
+    button.classList.add("btn");
+    button.classList.add("btn-outline-warning");
+    button.classList.add("btn-block");
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#pokemonModal');
 
     // Append button list item (li)
     listItem.appendChild(button);
@@ -91,32 +96,17 @@ let pokemonRepository = (function () {
 
   function showModal(title, imageUrl, height) {
 
-    modalContainer.innerHTML = '';
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
-
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal);
-
-    let titleElement = document.createElement('h1');
+    // Pokemon name
+    let titleElement = document.getElementById('pokemonName');
     titleElement.innerText = title;
 
+    // Pokemon height
+    let heightElement = document.getElementById("pokemonHeight");
+    heightElement.innerText = "" + height;
 
-    let heightElement = document.createElement("p");
-    heightElement.innerText = "Height:" + height;
-    let contentElement = document.createElement('img');
-    contentElement.src = imageUrl;
-
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(heightElement);
-    modal.appendChild(contentElement);
-    modalContainer.appendChild(modal);
-
-
-    modalContainer.classList.add('is-visible');
+    // Pokemon image
+    let imageElement = document.getElementById('pokemonImage');
+    imageElement.src = imageUrl;
   }
 
   function hideModal() {
@@ -125,15 +115,6 @@ let pokemonRepository = (function () {
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-      hideModal();
-    }
-  });
-
-  modalContainer.addEventListener('click', (e) => {
-    // Since this is also triggered when clicking INSIDE the modal
-    // We only want to close if the user clicks directly on the overlay
-    let target = e.target;
-    if (target === modalContainer) {
       hideModal();
     }
   });
@@ -150,8 +131,6 @@ let pokemonRepository = (function () {
     // loadDetails: loadDetails,
   };
 })();
-
-
 
 let myhtml = '';
 var largest = 0;
@@ -182,3 +161,4 @@ pokemonRepository.loadList().then(function () {
 
 document.getElementById("mypokemon").innerHTML = myhtml;
 document.getElementById("mybig").innerHTML = bightml;
+
