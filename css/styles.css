@@ -1,3 +1,6 @@
+body{
+	background-color: thistle;
+}
 .pokemon-list {
 	list-style: none;
 	margin: 0;
@@ -5,9 +8,19 @@
 }
 
 
+form {
+text-align: center;
+margin:auto;
+width: 25%;
+}
+.btn-block{
+	width: 25%;
+	margin: auto;
+}
+
 p {
-	
-	
+	text-align: center;
+
 }
 
 .center

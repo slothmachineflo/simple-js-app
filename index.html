@@ -24,34 +24,45 @@
   <img src="img/pokemon.png" alt="Pokemon Logo" class="center">
   <h1></h1>
   <h2>Table of Pokemons</h2>
+  <p>
+    <a href="https://pokeapi.co">API source: https://pokeapi.co</a>
+  </p>
   
 </header>
 
-<!---Nav Bar--->
+
+
+
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- <nav class="navbar navbar-expand-lg navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">Pokedex</a>
+      <a class="navbar-brand" href="#"></a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
+      </ul> -->
+      <div>
+      <form>
         
-        <!----
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        
+        <input onkeyup="filterFunction()" id="myInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+     
+
+
+
       </form>
     </div>
   
-  <--->
-  </nav>
+  
+  <!-- </nav> -->
 
 
 
-  <ul class='pokemon-list list-group'>
+  <ul id="myUL" class='pokemon-list list-group'>
+
   </ul>
+
 
       <div id="mypokemon"></div>
       <div id="mybig"></div>
@@ -86,6 +97,30 @@
     <script src="js/scripts.js"></script>
     <script src="js/fetch-polyfill.js"></script>
     <script src="js/promise-polyfill.js"></script>
+
+    <script>
+      function filterFunction() {
+         let input, filter, ul, li, btn, i, txtValue;
+         input = document.getElementById("myInput");
+         filter = input.value.toUpperCase();
+         ul = document.getElementById("myUL");
+         li = ul.getElementsByTagName("li");
+         for (i = 0; i < li.length; i++) {
+             btn = li[i].getElementsByTagName("button")[0];
+             txtValue = btn.textContent || btn.innerText;
+             if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                 li[i].style.display = "";
+             } else {
+                 li[i].style.display = "none";
+             }
+         }
+     }
+     </script>
+
+
+</body>
+
+</html>
 
 </body>
 
