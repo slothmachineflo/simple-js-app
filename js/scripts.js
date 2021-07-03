@@ -135,7 +135,7 @@ let pokemonRepository = (function () {
 let myhtml = '';
 var largest = 0;
 var bightml = '';
-let PokemonHeight = '';
+//let PokemonHeight = '';
 
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon, index) {
